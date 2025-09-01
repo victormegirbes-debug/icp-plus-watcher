@@ -1,0 +1,19 @@
+name: ICP+ Watcher
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # runs every 5 minutes
+  workflow_dispatch:
+
+jobs:
+  check-icp:
+    runs-on: ubuntu-latest
+    env:
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      CHAT_ID: ${{ secrets.CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run ICP+ watcher
+        run: |
+          python3 --version
+          python3 icpplus_watcher_github.py
